@@ -1,0 +1,1457 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080A18">
+<meta name="description" content="NITIN AI - Your personal AI companion">
+<title>NITIN AI | Human Experience</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+        <div class="brand-logo">N</div>
+        <div>
+            <strong>NITIN AI</strong>
+            <small>PERSONAL COMPANION</small>
+        </div>
+    </div>
+
+    <button class="new-chat-btn" id="newChat">
+        ＋ New Conversation
+    </button>
+
+    <div class="sidebar-heading">RECENT CHATS</div>
+    <div id="historyList" class="history-list"></div>
+
+    <div class="sidebar-bottom">
+        <button id="clearChats">🗑 Clear Conversations</button>
+    </div>
+
+</aside>
+
+<div class="overlay" id="overlay"></div>
+
+<!-- MAIN -->
+<main class="main">
+
+    <header class="topbar">
+        <div class="topbar-left">
+            <button class="mobile-menu" id="menuButton">☰</button>
+
+            <div>
+                <strong>NITIN AI</strong>
+                <small class="online-status">● Online Assistant</small>
+            </div>
+        </div>
+
+        <div class="topbar-right">
+            <span id="chatStatus">Ready</span>
+        </div>
+    </header>
+
+    <div class="content">
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-orb">
+                <img src="nitin.png" alt="NITIN AI"
+                     onerror="this.style.display='none'">
+            </div>
+
+            <h1>NITIN AI</h1>
+            <p>Your Personal AI Companion</p>
+        </section>
+
+        <!-- CHAT -->
+        <section class="chat-card">
+
+            <div class="chat-header">
+                <div>
+                    <strong>✦ ASK NITIN AI</strong>
+                    <small>Intelligent Conversation</small>
+                </div>
+
+                <span class="chat-indicator">● ACTIVE</span>
+            </div>
+
+            <div id="conversation" class="conversation">
+                <!-- No automatic greeting -->
+            </div>
+
+            <div class="composer">
+
+                <textarea
+                    id="message"
+                    placeholder="Type your message here..."
+                    rows="1"></textarea>
+
+                <div class="composer-bottom">
+
+                    <select id="chatMode">
+                        <option value="general">General Chat</option>
+                        <option value="study">Study Mode</option>
+                        <option value="coding">Coding Expert</option>
+                        <option value="creative">Creative Mode</option>
+                        <option value="problem">Problem Solving</option>
+                    </select>
+
+                    <button id="sendButton" class="send-button">
+                        Send ➤
+                    </button>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- VOICE -->
+        <section class="voice-panel">
+
+            <div class="voice-heading">
+                <div>
+                    <span class="voice-icon">🎀</span>
+                    <h2>Female Voice Experience</h2>
+                    <p>Choose how NITIN AI speaks with you.</p>
+                </div>
+
+                <span class="voice-badge">VOICE STUDIO</span>
+            </div>
+
+            <div class="voice-settings">
+
+                <div class="setting">
+                    <label for="voiceEngine">Voice Engine</label>
+                    <select id="voiceEngine">
+                        <option value="auto">Auto Voice</option>
+                        <option value="expressive">Expressive Female Voice</option>
+                        <option value="browser">Browser Voice</option>
+                    </select>
+                </div>
+
+                <div class="setting">
+                    <label for="voiceSelect">Female Voice</label>
+                    <select id="voiceSelect">
+                        <option value="auto">Auto Female Voice</option>
+                    </select>
+                </div>
+
+                <div class="setting">
+                    <label for="languageSelect">Language</label>
+                    <select id="languageSelect">
+                        <option value="hi">Hindi / Hinglish</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+
+                <div class="setting">
+                    <label for="emotionSelect">Emotion</label>
+                    <select id="emotionSelect">
+                        <option value="auto">Automatic Emotion</option>
+                        <option value="caring">Soft & Caring</option>
+                        <option value="love">Love & Affection</option>
+                        <option value="happy">Happy & Excited</option>
+                        <option value="laughing">Laughing</option>
+                        <option value="sad">Sad & Crying</option>
+                        <option value="angry">Angry & Firm</option>
+                        <option value="whisper">Whispering</option>
+                    </select>
+                </div>
+
+                <div class="setting speed-setting">
+                    <label for="speedSelect">
+                        Speaking Speed
+                        <span id="speedValue">0.95x</span>
+                    </label>
+                    <input
+                        type="range"
+                        id="speedSelect"
+                        min="0.7"
+                        max="1.2"
+                        step="0.05"
+                        value="0.95">
+                </div>
+
+            </div>
+
+            <div class="voice-buttons">
+                <button id="startVoice" class="voice-primary">
+                    🎙 Start Talking
+                </button>
+
+                <button id="stopVoice">
+                    Stop Listening
+                </button>
+
+                <button id="interruptVoice">
+                    ⏸ Interrupt AI
+                </button>
+
+                <button id="replayVoice">
+                    🔁 Replay Answer
+                </button>
+
+                <button id="previewVoice">
+                    ▶ Voice Preview
+                </button>
+            </div>
+
+            <div class="voice-status">
+                <span id="voiceDot"></span>
+                <span id="voiceStatus">Voice system ready</span>
+                <span id="voiceWave">● ● ●</span>
+            </div>
+
+            <div id="emotionStatus" class="emotion-status">
+                Emotion system ready.
+            </div>
+
+        </section>
+
+    </div>
+
+    <footer>
+        NITIN AI © 2026 | Designed with curiosity.
+    </footer>
+
+</main>
+</div>
+
+<script>
+
+/* =========================================
+   NITIN AI CONFIGURATION
+========================================= */
+
+"use strict";
+
+const $ = id => document.getElementById(id);
+
+const API_URL = "/api";
+
+const STORAGE = {
+    chats: "nitin_ai_conversations_v1",
+    active: "nitin_ai_active_chat_v1",
+    language: "nitin_ai_language_v1",
+    speed: "nitin_ai_speed_v1",
+    engine: "nitin_ai_engine_v1",
+    emotion: "nitin_ai_emotion_v1",
+    voice: "nitin_ai_voice_v1"
+};
+
+let chats = [];
+let activeId = null;
+let waiting = false;
+let lastAssistantMessage = "";
+
+let recognition = null;
+let listening = false;
+
+let isSpeaking = false;
+let recognitionCooldown = null;
+let activeSpeechDone = null;
+
+let currentAudio = null;
+let currentAudioUrl = null;
+
+let availableVoices = [];
+
+function abortRecognition() {
+    if (recognition) {
+        try {
+            recognition.abort();
+        } catch {}
+    }
+}
+
+
+/* =========================================
+   STORAGE
+========================================= */
+
+function readStorage(key, fallback) {
+    try {
+        return localStorage.getItem(key) ?? fallback;
+    } catch {
+        return fallback;
+    }
+}
+
+function saveStorage(key, value) {
+    try {
+        localStorage.setItem(key, value);
+    } catch {}
+}
+
+function saveSettings() {
+
+    saveStorage(STORAGE.language, $("languageSelect").value);
+    saveStorage(STORAGE.speed, $("speedSelect").value);
+    saveStorage(STORAGE.engine, $("voiceEngine").value);
+    saveStorage(STORAGE.emotion, $("emotionSelect").value);
+    saveStorage(STORAGE.voice, $("voiceSelect").value);
+
+}
+
+function loadSettings() {
+
+    $("languageSelect").value =
+        readStorage(STORAGE.language, "hi");
+
+    $("speedSelect").value =
+        readStorage(STORAGE.speed, "0.95");
+
+    $("voiceEngine").value =
+        readStorage(STORAGE.engine, "auto");
+
+    $("emotionSelect").value =
+        readStorage(STORAGE.emotion, "auto");
+
+    updateSpeed();
+
+}
+
+
+/* =========================================
+   CHAT MANAGEMENT
+========================================= */
+
+function activeChat() {
+
+    return chats.find(chat => chat.id === activeId);
+
+}
+
+function saveChats() {
+
+    saveStorage(STORAGE.chats, JSON.stringify(chats));
+    saveStorage(STORAGE.active, activeId || "");
+
+}
+
+function createNewChat() {
+
+    const chat = {
+        id: Date.now().toString(),
+        title: "New Conversation",
+        messages: [],
+        updatedAt: Date.now()
+    };
+
+    chats.unshift(chat);
+    activeId = chat.id;
+
+    saveChats();
+    renderAll();
+    closeSidebar();
+
+    $("message").focus();
+
+}
+
+function loadChats() {
+
+    try {
+
+        const saved = JSON.parse(
+            readStorage(STORAGE.chats, "[]")
+        );
+
+        chats = Array.isArray(saved) ? saved : [];
+
+    } catch {
+
+        chats = [];
+
+    }
+
+    activeId = readStorage(STORAGE.active, null);
+
+    if (!chats.some(chat => chat.id === activeId)) {
+        activeId = chats[0]?.id || null;
+    }
+
+    if (!activeId) {
+        createNewChat();
+    } else {
+        renderAll();
+    }
+
+}
+
+function deleteChat(id) {
+
+    chats = chats.filter(chat => chat.id !== id);
+
+    if (activeId === id) {
+        activeId = chats[0]?.id || null;
+    }
+
+    if (!activeId) {
+        createNewChat();
+    } else {
+        saveChats();
+        renderAll();
+    }
+
+}
+
+function addMessage(role, content) {
+
+    const chat = activeChat();
+
+    if (!chat) return;
+
+    chat.messages.push({
+        role,
+        content: String(content),
+        time: Date.now()
+    });
+
+    chat.updatedAt = Date.now();
+
+    if (
+        role === "user" &&
+        chat.title === "New Conversation"
+    ) {
+        chat.title = String(content).slice(0, 35);
+    }
+
+    saveChats();
+    renderHistory();
+    drawMessage(role, content);
+
+}
+
+
+/* =========================================
+   CHAT RENDERING
+========================================= */
+
+function renderAll() {
+
+    renderHistory();
+    renderConversation();
+
+}
+
+function renderHistory() {
+
+    const list = $("historyList");
+    list.innerHTML = "";
+
+    chats.forEach(chat => {
+
+        const row = document.createElement("div");
+        row.className = "history-row";
+
+        const openButton = document.createElement("button");
+
+        openButton.className =
+            "history-open" +
+            (chat.id === activeId ? " active" : "");
+
+        openButton.textContent = chat.title;
+
+        openButton.onclick = () => {
+
+            activeId = chat.id;
+
+            saveChats();
+            renderAll();
+            closeSidebar();
+
+        };
+
+        const deleteButton = document.createElement("button");
+
+        deleteButton.className = "delete-chat";
+        deleteButton.textContent = "×";
+
+        deleteButton.onclick = () => deleteChat(chat.id);
+
+        row.append(openButton, deleteButton);
+        list.append(row);
+
+    });
+
+}
+
+function renderConversation() {
+
+    const box = $("conversation");
+    box.innerHTML = "";
+
+    const chat = activeChat();
+
+    if (!chat) return;
+
+    chat.messages.forEach(message => {
+
+        drawMessage(
+            message.role,
+            message.content,
+            false
+        );
+
+    });
+
+    box.scrollTop = box.scrollHeight;
+
+}
+
+function drawMessage(role, content, scroll = true) {
+
+    const row = document.createElement("div");
+
+    row.className = "message-row " + role;
+
+    const avatar = document.createElement("div");
+
+    avatar.className = "avatar";
+    avatar.textContent = role === "user" ? "👤" : "✦";
+
+    const wrapper = document.createElement("div");
+
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+
+    /* Safe text rendering */
+    bubble.textContent = String(content);
+
+    wrapper.append(bubble);
+
+    if (role === "assistant") {
+
+        const actions = document.createElement("div");
+
+        actions.className = "message-actions";
+
+        const listenButton = document.createElement("button");
+
+        listenButton.textContent = "🔊 Listen";
+        listenButton.onclick = () => speakText(content);
+
+        const copyButton = document.createElement("button");
+
+        copyButton.textContent = "Copy";
+
+        copyButton.onclick = async () => {
+
+            try {
+
+                await navigator.clipboard.writeText(content);
+
+                copyButton.textContent = "Copied!";
+
+                setTimeout(() => {
+                    copyButton.textContent = "Copy";
+                }, 1000);
+
+            } catch {
+
+                copyButton.textContent = "Copy unavailable";
+
+            }
+
+        };
+
+        actions.append(listenButton, copyButton);
+        wrapper.append(actions);
+
+    }
+
+    row.append(avatar, wrapper);
+    $("conversation").append(row);
+
+    if (scroll) {
+        $("conversation").scrollTop =
+            $("conversation").scrollHeight;
+    }
+
+}
+
+
+/* =========================================
+   GEMINI CHAT API
+========================================= */
+
+async function askAI(message) {
+
+    const chat = activeChat();
+
+    const history = chat.messages.slice(-12).map(item => ({
+        role: item.role,
+        content: item.content
+    }));
+
+    const response = await fetch(API_URL + "/chat", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            message,
+            history,
+            mode: $("chatMode").value
+        })
+
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+
+        throw new Error(
+            data.error || "AI server error: " + response.status
+        );
+
+    }
+
+    if (!data.reply) {
+        throw new Error("AI returned an empty response.");
+    }
+
+    return data.reply;
+
+}
+
+async function sendMessage() {
+
+    const input = $("message");
+    const message = input.value.trim();
+
+    if (!message || waiting || isSpeaking) return;
+
+    if (!activeChat()) {
+        createNewChat();
+    }
+
+    input.value = "";
+    input.style.height = "54px";
+
+    addMessage("user", message);
+
+    waiting = true;
+    abortRecognition();
+
+    $("sendButton").disabled = true;
+    $("chatStatus").textContent = "Thinking...";
+
+    const typing = document.createElement("div");
+
+    typing.className = "typing";
+    typing.textContent = "NITIN AI is thinking...";
+
+    $("conversation").append(typing);
+
+    try {
+
+        const answer = await askAI(message);
+
+        typing.remove();
+
+        addMessage("assistant", answer);
+
+        lastAssistantMessage = answer;
+
+        if (listening) {
+            await speakText(answer);
+        }
+
+    } catch (error) {
+
+        typing.remove();
+
+        addMessage(
+            "assistant",
+            "Connection error: " + error.message
+        );
+
+    } finally {
+
+        waiting = false;
+
+        $("sendButton").disabled = false;
+        $("chatStatus").textContent = "Ready";
+
+        if (listening && !isSpeaking) {
+            restartRecognition(600);
+        }
+
+        input.focus();
+
+    }
+
+}
+
+
+/* =========================================
+   EMOTION DETECTION
+========================================= */
+
+function detectEmotion(text) {
+
+    const value = String(text).toLowerCase();
+
+    if (/haha|hahaha|lol|😂|🤣|funny/i.test(value)) {
+        return "laughing";
+    }
+
+    if (/sorry|sad|dukhi|rona|cry|upset|heartbreak/i.test(value)) {
+        return "sad";
+    }
+
+    if (/angry|gussa|irritated|naraz/i.test(value)) {
+        return "angry";
+    }
+
+    if (/love you|pyaar|mohabbat|sweetheart/i.test(value)) {
+        return "love";
+    }
+
+    if (/congratulations|amazing|awesome|shabash|well done/i.test(value)) {
+        return "happy";
+    }
+
+    return "caring";
+
+}
+
+
+/* =========================================
+   SPEECH CLEANING
+========================================= */
+
+function cleanSpeech(text) {
+
+    return String(text)
+
+        .replace(/```[\s\S]*?```/g, " Code block omitted. ")
+
+        .replace(/`([^`]+)`/g, "$1")
+
+        .replace(/!\[.*?\]\(.*?\)/g, "")
+
+        .replace(/\[([^\]]+)\]\(.*?\)/g, "$1")
+
+        .replace(/[#>*_~]/g, "")
+
+        .replace(/https?:\/\/\S+/g, "")
+
+        .replace(/\s+/g, " ")
+
+        .trim();
+
+}
+
+
+/* =========================================
+   FEMALE VOICE SELECTION
+========================================= */
+
+function femaleVoiceScore(voice) {
+
+    const name = voice.name.toLowerCase();
+
+    let score = 0;
+
+    if (/female|woman|zira|heera|samantha|aria|jenny|sonia|neerja|swara/i.test(name)) {
+        score += 10;
+    }
+
+    if (voice.lang.toLowerCase().startsWith("hi")) {
+        score += 5;
+    }
+
+    if (voice.lang.toLowerCase().startsWith("en")) {
+        score += 2;
+    }
+
+    return score;
+
+}
+
+function loadVoices() {
+
+    if (!("speechSynthesis" in window)) {
+
+        $("voiceSelect").innerHTML =
+            '<option value="auto">Browser voice unavailable</option>';
+
+        return;
+
+    }
+
+    availableVoices = speechSynthesis.getVoices();
+
+    const select = $("voiceSelect");
+
+    const previous = readStorage(STORAGE.voice, "auto");
+
+    select.innerHTML = "";
+
+    const automatic = document.createElement("option");
+
+    automatic.value = "auto";
+    automatic.textContent = "Auto Female Voice";
+
+    select.append(automatic);
+
+    const sorted = [...availableVoices].sort(
+        (a, b) => femaleVoiceScore(b) - femaleVoiceScore(a)
+    );
+
+    sorted.forEach((voice, index) => {
+
+        const option = document.createElement("option");
+
+        option.value = voice.name;
+
+        option.textContent =
+            voice.name + " — " + voice.lang;
+
+        select.append(option);
+
+    });
+
+    if (
+        previous === "auto" ||
+        availableVoices.some(v => v.name === previous)
+    ) {
+        select.value = previous;
+    } else {
+        select.value = "auto";
+    }
+
+}
+
+
+/* =========================================
+   VOICE STATUS
+========================================= */
+
+function setVoiceStatus(text, active = false) {
+
+    $("voiceStatus").textContent = text;
+
+    $("voiceDot").classList.toggle(
+        "active",
+        active
+    );
+
+    $("voiceWave").classList.toggle(
+        "active",
+        active
+    );
+
+}
+
+function updateSpeed() {
+
+    $("speedValue").textContent =
+        Number($("speedSelect").value).toFixed(2) + "x";
+
+}
+
+
+/* =========================================
+   STOP SPEECH
+========================================= */
+
+function stopSpeaking() {
+
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+    }
+
+    if (currentAudioUrl) {
+        URL.revokeObjectURL(currentAudioUrl);
+        currentAudioUrl = null;
+    }
+
+    if ("speechSynthesis" in window) {
+        speechSynthesis.cancel();
+    }
+
+    isSpeaking = false;
+
+    if (activeSpeechDone) {
+        const done = activeSpeechDone;
+        activeSpeechDone = null;
+        done();
+    }
+
+    setVoiceStatus(
+        listening ? "Listening..." : "Voice ready",
+        listening
+    );
+
+}
+
+
+/* =========================================
+   EXPRESSIVE VOICE API
+========================================= */
+
+function speakText(text) {
+
+    return new Promise(resolve => {
+
+        const clean = cleanSpeech(text);
+
+        if (!clean) {
+            resolve();
+            return;
+        }
+
+        stopSpeaking();
+
+        isSpeaking = true;
+        abortRecognition();
+
+        const selected = $("emotionSelect").value;
+
+        const emotion =
+            selected === "auto"
+                ? detectEmotion(clean)
+                : selected;
+
+        $("emotionStatus").textContent =
+            "Current emotion: " + emotion;
+
+        const finishSpeaking = () => {
+
+            if (!isSpeaking) {
+                resolve();
+                return;
+            }
+
+            isSpeaking = false;
+            activeSpeechDone = null;
+            currentAudio = null;
+
+            if (currentAudioUrl) {
+                URL.revokeObjectURL(currentAudioUrl);
+                currentAudioUrl = null;
+            }
+
+            setVoiceStatus(
+                listening ? "Listening..." : "Voice ready",
+                listening
+            );
+
+            resolve();
+
+            if (listening) {
+                restartRecognition(750);
+            }
+
+        };
+
+        activeSpeechDone = finishSpeaking;
+
+        const engine = $("voiceEngine").value;
+
+        if (engine !== "browser") {
+
+            setVoiceStatus(
+                "Preparing expressive voice...",
+                true
+            );
+
+            fetch(API_URL + "/tts", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    text: clean,
+                    emotion,
+                    language: $("languageSelect").value,
+                    speed: Number($("speedSelect").value)
+                })
+            })
+            .then(async response => {
+
+                if (!response.ok) {
+                    const error = await response.json().catch(() => ({}));
+                    throw new Error(
+                        error.error || "Expressive voice unavailable."
+                    );
+                }
+
+                const blob = await response.blob();
+
+                if (!isSpeaking) {
+                    resolve();
+                    return;
+                }
+
+                currentAudioUrl = URL.createObjectURL(blob);
+                currentAudio = new Audio(currentAudioUrl);
+
+                currentAudio.onplay = () => {
+                    setVoiceStatus(
+                        "NITIN AI is speaking...",
+                        true
+                    );
+                };
+
+                currentAudio.onended = () => {
+                    finishSpeaking();
+                };
+
+                currentAudio.onerror = () => {
+                    setVoiceStatus("Audio playback failed.");
+                    finishSpeaking();
+                };
+
+                await currentAudio.play();
+
+            })
+            .catch(error => {
+
+                if (engine === "expressive") {
+                    setVoiceStatus(error.message);
+                    finishSpeaking();
+                    return;
+                }
+
+                $("emotionStatus").textContent =
+                    "Expressive voice unavailable. Using browser voice.";
+
+                browserSpeak(clean, emotion, finishSpeaking);
+
+            });
+
+        } else {
+
+            browserSpeak(clean, emotion, finishSpeaking);
+
+        }
+
+    });
+
+}
+
+
+/* =========================================
+   BROWSER VOICE FALLBACK
+========================================= */
+
+function browserSpeak(text, emotion, onDone) {
+
+    if (!("speechSynthesis" in window)) {
+
+        setVoiceStatus("Speech output unavailable.");
+
+        if (onDone) onDone();
+
+        return;
+
+    }
+
+    speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    utterance.lang =
+        $("languageSelect").value === "hi"
+            ? "hi-IN"
+            : "en-IN";
+
+    utterance.rate =
+        Number($("speedSelect").value);
+
+    utterance.pitch =
+        emotion === "happy" || emotion === "love"
+            ? 1.2
+            : emotion === "angry"
+                ? 0.9
+                : 1.08;
+
+    const chosen = $("voiceSelect").value;
+
+    const voice =
+        availableVoices.find(v => v.name === chosen) ||
+        availableVoices
+            .filter(v => v.lang.toLowerCase().startsWith(
+                $("languageSelect").value
+            ))
+            .sort((a, b) => femaleVoiceScore(b) - femaleVoiceScore(a))[0];
+
+    if (voice) {
+        utterance.voice = voice;
+    }
+
+    let completed = false;
+
+    const complete = () => {
+        if (completed) return;
+        completed = true;
+        if (onDone) onDone();
+    };
+
+    utterance.onstart = () => {
+
+        setVoiceStatus(
+            "Speaking with browser voice...",
+            true
+        );
+
+    };
+
+    utterance.onend = () => {
+
+        complete();
+
+    };
+
+    utterance.onerror = () => {
+
+        setVoiceStatus("Browser voice error.");
+        complete();
+
+    };
+
+    speechSynthesis.speak(utterance);
+
+}
+
+
+/* =========================================
+   VOICE INPUT
+========================================= */
+
+const SpeechRecognitionAPI =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+if (SpeechRecognitionAPI) {
+
+    recognition = new SpeechRecognitionAPI();
+
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onstart = () => {
+
+        setVoiceStatus(
+            "Listening... Speak now.",
+            true
+        );
+
+    };
+
+    recognition.onresult = event => {
+
+        if (isSpeaking || waiting) {
+            abortRecognition();
+            return;
+        }
+
+        const transcript =
+            event.results[0][0].transcript.trim();
+
+        if (transcript && !waiting && !isSpeaking) {
+
+            abortRecognition();
+
+            $("message").value = transcript;
+
+            sendMessage();
+
+        }
+
+    };
+
+    recognition.onerror = event => {
+
+        if (event.error === "not-allowed") {
+
+            listening = false;
+
+            setVoiceStatus(
+                "Microphone permission denied."
+            );
+
+        } else if (
+            event.error !== "no-speech" &&
+            event.error !== "aborted"
+        ) {
+
+            setVoiceStatus(
+                "Microphone error: " + event.error
+            );
+
+        }
+
+    };
+
+    recognition.onend = () => {
+
+        if (
+            listening &&
+            !waiting &&
+            !isSpeaking
+        ) {
+
+            restartRecognition(300);
+
+        }
+
+    };
+
+}
+
+
+/* =========================================
+   START / STOP LISTENING
+========================================= */
+
+function startListening() {
+
+    if (!recognition) {
+
+        setVoiceStatus(
+            "Speech recognition is not supported in this browser."
+        );
+
+        return;
+
+    }
+
+    listening = true;
+
+    restartRecognition(0);
+
+}
+
+function restartRecognition(delay = 0) {
+
+    if (
+        !listening ||
+        waiting ||
+        isSpeaking
+    ) return;
+
+    if (recognitionCooldown) {
+        clearTimeout(recognitionCooldown);
+        recognitionCooldown = null;
+    }
+
+    if (delay > 0) {
+        recognitionCooldown = setTimeout(() => {
+            recognitionCooldown = null;
+            restartRecognition(0);
+        }, delay);
+        return;
+    }
+
+    abortRecognition();
+
+    try {
+
+        recognition.lang =
+            $("languageSelect").value === "hi"
+                ? "hi-IN"
+                : "en-IN";
+
+        recognition.start();
+
+    } catch {}
+
+}
+
+function stopListening() {
+
+    listening = false;
+
+    if (recognitionCooldown) {
+        clearTimeout(recognitionCooldown);
+        recognitionCooldown = null;
+    }
+
+    abortRecognition();
+
+    stopSpeaking();
+
+    setVoiceStatus("Voice session stopped.");
+
+}
+
+
+/* =========================================
+   VOICE PREVIEW
+========================================= */
+
+function previewVoice() {
+
+    speakText(
+        "Hello! Main NITIN AI hoon. " +
+        "Main tumhari baat dhyan se sun rahi hoon. " +
+        "Chalo, aaj kuch naya seekhte hain."
+    );
+
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+function openSidebar() {
+
+    $("sidebar").classList.add("open");
+    $("overlay").classList.add("show");
+
+}
+
+function closeSidebar() {
+
+    $("sidebar").classList.remove("open");
+    $("overlay").classList.remove("show");
+
+}
+
+
+/* =========================================
+   EVENT LISTENERS
+========================================= */
+
+$("sendButton").onclick = sendMessage;
+
+$("message").addEventListener("keydown", event => {
+
+    if (
+        event.key === "Enter" &&
+        !event.shiftKey
+    ) {
+
+        event.preventDefault();
+
+        sendMessage();
+
+    }
+
+});
+
+$("message").addEventListener("input", () => {
+
+    $("message").style.height = "54px";
+
+    $("message").style.height =
+        Math.min($("message").scrollHeight, 150) + "px";
+
+});
+
+$("newChat").onclick = createNewChat;
+
+$("clearChats").onclick = () => {
+
+    if (!confirm("Delete all conversations?")) return;
+
+    chats = [];
+    activeId = null;
+
+    saveChats();
+
+    createNewChat();
+
+};
+
+$("menuButton").onclick = openSidebar;
+$("overlay").onclick = closeSidebar;
+
+$("startVoice").onclick = startListening;
+$("stopVoice").onclick = stopListening;
+$("interruptVoice").onclick = stopSpeaking;
+
+$("replayVoice").onclick = () => {
+
+    if (!lastAssistantMessage) {
+
+        setVoiceStatus("No answer to replay yet.");
+
+        return;
+
+    }
+
+    speakText(lastAssistantMessage);
+
+};
+
+$("previewVoice").onclick = previewVoice;
+
+
+/* =========================================
+   SETTINGS EVENTS
+========================================= */
+
+[
+    "voiceEngine",
+    "voiceSelect",
+    "languageSelect",
+    "emotionSelect"
+].forEach(id => {
+
+    $(id).addEventListener("change", saveSettings);
+
+});
+
+$("speedSelect").addEventListener("input", () => {
+
+    updateSpeed();
+    saveSettings();
+
+});
+
+
+/* =========================================
+   INITIALIZATION
+========================================= */
+
+function initializeNitinAI() {
+
+    loadSettings();
+
+    loadChats();
+
+    loadVoices();
+
+    if ("speechSynthesis" in window) {
+
+        speechSynthesis.onvoiceschanged = loadVoices;
+
+    }
+
+    setVoiceStatus("Voice system ready");
+
+    console.log("NITIN AI initialized successfully.");
+
+}
+
+initializeNitinAI();
+
+</script>
+
+</body>
+</html>
